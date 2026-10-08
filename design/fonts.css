@@ -1,0 +1,6 @@
+/* Self-hosted fonts, all SIL Open Font License 1.1 (licences in fonts/). No requests to third-party font servers.
+   Variable fonts: one file per family covers every weight in its range. */
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("../fonts/AtkinsonHyperlegibleNext-Variable.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("../fonts/AtkinsonHyperlegibleNext-Italic-Variable.woff2") format("woff2"); font-weight: 200 800; font-style: italic; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible Mono"; src: url("../fonts/AtkinsonHyperlegibleMono-Variable.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("../fonts/InterTight-Variable.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
