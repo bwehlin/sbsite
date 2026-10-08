@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StableBear</title>
+  <meta name="description" content="StableBear is an open-source Python package with a C++/CUDA backend for GPU-accelerated computation on piecewise constant functions.">
+  <link rel="icon" href="assets/logos/stablebear-head.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="design/fonts.css">
+  <link rel="stylesheet" href="design/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="./">
+        <img src="assets/logos/stablebear-head.svg" alt="" width="32" height="33">
+        <span class="wordmark-nav">StableBear</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="https://docs.stablebear.org">Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-text">
+        <h1>A computational package for discrete objects in Python and C++.</h1>
+        <p class="lede">StableBear is an open-source Python package with a C++/CUDA backend for GPU-accelerated computation on piecewise constant functions: stable ranks, Euler characteristic curves, Betti curves and the distances and kernels between them.</p>
+        <p class="actions">
+          <a class="button primary" href="https://docs.stablebear.org">Read the docs</a>
+          <a class="button" href="#install">Install</a>
+        </p>
+      </div>
+      <img class="hero-bear" src="assets/logos/stablebear-bear.svg" alt="The StableBear bear, sitting cross-legged" width="681" height="613">
+    </section>
+
+    <section id="features" class="wrap" aria-labelledby="features-title">
+      <h2 id="features-title">What it computes</h2>
+
+      <div class="slideshow" aria-roledescription="carousel" aria-label="Features">
+        <div class="slides" aria-live="off">
+          <article class="slide" aria-roledescription="slide" aria-label="1 of 4">
+            <svg viewBox="0 0 320 120" aria-hidden="true"><polyline class="s1" points="0,20 70,20 70,45 150,45 150,70 210,70 210,90 270,90 270,110 320,110"/></svg>
+            <div>
+              <h3>Stable ranks</h3>
+              <p>A stable rank turns a persistence module into a non-increasing piecewise constant function. StableBear computes stable ranks with a GPU-accelerated backend.</p>
+            </div>
+          </article>
+          <article class="slide" aria-roledescription="slide" aria-label="2 of 4" hidden>
+            <svg viewBox="0 0 320 120" aria-hidden="true"><polyline class="s1" points="0,80 40,80 40,40 100,40 100,60 160,60 160,20 220,20 220,70 280,70 280,50 320,50"/></svg>
+            <div>
+              <h3>Euler characteristic curves</h3>
+              <p>The Euler characteristic of each sublevel set of a filtration, as a step function of the filtration value.</p>
+            </div>
+          </article>
+          <article class="slide" aria-roledescription="slide" aria-label="3 of 4" hidden>
+            <svg viewBox="0 0 320 120" aria-hidden="true"><polyline class="s1" points="0,100 30,100 30,30 90,30 90,60 180,60 180,90 320,90"/><polyline class="s2" points="0,110 80,110 80,70 140,70 140,50 230,50 230,100 320,100"/></svg>
+            <div>
+              <h3>Betti curves</h3>
+              <p>The Betti numbers of each sublevel set (H&#8320;, H&#8321;, ...), as step functions of the filtration value.</p>
+            </div>
+          </article>
+          <article class="slide" aria-roledescription="slide" aria-label="4 of 4" hidden>
+            <svg viewBox="0 0 320 120" aria-hidden="true"><polyline class="s1" points="0,20 60,20 60,50 140,50 140,80 230,80 230,105 320,105"/><polyline class="s2" points="0,35 90,35 90,60 170,60 170,75 260,75 260,100 320,100"/></svg>
+            <div>
+              <h3>Distances and kernels</h3>
+              <p>Pairwise L<sub>p</sub> distances between stable rank curves, and kernels between them.</p>
+            </div>
+          </article>
+        </div>
+        <div class="slide-controls">
+          <button type="button" class="button pause" aria-pressed="false">Pause</button>
+          <div class="dots" role="group" aria-label="Choose slide">
+            <button type="button" aria-label="Slide 1: Stable ranks" aria-current="true"></button>
+            <button type="button" aria-label="Slide 2: Euler characteristic curves"></button>
+            <button type="button" aria-label="Slide 3: Betti curves"></button>
+            <button type="button" aria-label="Slide 4: Distances and kernels"></button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <h3>Python, with a C++/CUDA backend</h3>
+          <p>A Python interface over a compiled backend: <code>import stablebear as sb</code>.</p>
+        </li>
+        <li>
+          <h3>GPU-accelerated</h3>
+          <p>The heavy computation runs on CUDA. [PLACEHOLDER: supported GPUs and CPU fallback]</p>
+        </li>
+        <li>
+          <h3>Open source</h3>
+          <p>Source code on [PLACEHOLDER: repository link] under [PLACEHOLDER: licence].</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="install" class="band" aria-labelledby="install-title">
+      <div class="wrap">
+        <h2 id="install-title">Install</h2>
+        <div class="install">
+          <code id="pip">pip install stablebear</code>
+          <button type="button" class="button primary" data-copy="pip">Copy</button>
+        </div>
+        <p>Then <code>import stablebear as sb</code> and follow the <a href="https://docs.stablebear.org">documentation</a> for examples.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p><span class="wordmark-nav">StableBear</span></p>
+    <p><a href="https://docs.stablebear.org">Documentation</a> &middot; [PLACEHOLDER: GitHub link]</p>
+    <p class="small">Fonts: Atkinson Hyperlegible Next and Mono, Inter Tight, under the SIL Open Font License 1.1.</p>
+  </footer>
+</body>
+</html>
