@@ -1,4 +1,4 @@
-/* Page styles. Colour, type, spacing and radii come only from design/tokens.css. */
+/* Global page styles. Colour, type, spacing and radii come only from design/tokens.css. */
 
 * { box-sizing: border-box; }
 
@@ -59,29 +59,33 @@ a { color: var(--espresso); }
 .actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
 .hero-bear { width: 100%; height: auto; }
 
-/* Slideshow */
-.slideshow { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface-raised); padding: var(--space-8); }
-.slide { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center; }
-.slide[hidden] { display: none; }
-.slide svg { width: 100%; height: auto; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
-.slide polyline { fill: none; stroke-width: 3; }
-.slide .s1 { stroke: var(--espresso); }
-.slide .s2 { stroke: var(--honey); }
-.slide p { color: var(--ink-muted); }
-.slide-controls { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-8); }
-.dots { display: flex; gap: var(--space-2); }
-.dots button {
-  width: var(--space-8);
-  height: var(--space-4);
-  padding: 0;
-  border: 1px solid var(--espresso);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  cursor: pointer;
+/* Feature showcase: the side column stays put while the figures scroll past (desktop);
+   on narrow screens the figures stack with their own captions. */
+.showcase { background: var(--espresso); color: var(--on-espresso); border-radius: var(--radius-lg); margin-inline: var(--space-2); padding-block: calc(var(--space-8) * 2); }
+.showcase a { color: var(--on-espresso); }
+.showcase :focus-visible { outline-color: var(--honey); }
+.showcase-grid { display: grid; grid-template-columns: 22rem 1fr; gap: calc(var(--space-8) * 2); align-items: start; }
+.showcase-side { position: sticky; top: calc(var(--space-8) * 2); }
+.showcase-nav { list-style: none; padding: 0; margin: 0; }
+.showcase-nav a { position: relative; display: block; text-decoration: none; padding-block: var(--space-4) var(--space-2); box-shadow: inset 0 -1px 0 var(--espresso-tint); }
+.showcase-nav a:not([aria-current="true"]) { opacity: 0.8; }
+/* Honey bar under the current item: how far the reader has scrolled through its figure. */
+.showcase-nav a[aria-current="true"]::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: var(--progress, 0%); background: var(--honey); }
+.showcase-nav a { font: var(--text-h3); }
+.showcase-panel { margin: 0; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; scroll-margin-top: var(--space-8); }
+.showcase-panel img { width: 100%; height: 24rem; object-fit: contain; }
+.showcase-panel figcaption { margin-top: var(--space-4); max-width: 40rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+/* Too narrow or too short for the sticky layout: stack figures with their captions. */
+@media (max-width: 960px), (max-height: 640px) {
+  .showcase { padding-block: var(--space-8); }
+  .showcase-grid { grid-template-columns: 1fr; gap: 0; }
+  .showcase-side { position: static; }
+  .showcase-side h2 { margin-bottom: 0; }
+  .showcase-nav { display: none; }
+  .showcase-panel { min-height: 0; padding-top: var(--space-8); }
+  .showcase-panel img { height: auto; max-height: 20rem; }
 }
-.dots button[aria-current="true"] { background: var(--espresso); }
-
-#features { padding-top: calc(var(--space-8) * 2); }
 
 /* Feature cards */
 .cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: var(--space-4); margin-block: var(--space-8) calc(var(--space-8) * 2); }
@@ -100,6 +104,4 @@ a { color: var(--espresso); }
   .hero { grid-template-columns: 1fr; padding-block: var(--space-8); }
   .hero h1 { font: var(--text-h1); }
   .hero-bear { order: -1; max-width: 12rem; }
-  .slide { grid-template-columns: 1fr; gap: var(--space-4); }
-  .slideshow { padding: var(--space-4); }
 }

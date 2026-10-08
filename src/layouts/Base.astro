@@ -1,0 +1,53 @@
+---
+// Page shell: head, navbar and footer. Fonts and tokens come from design/, bundled by Astro.
+import "../../design/fonts.css";
+import "../../design/tokens.css";
+import "../styles/site.css";
+import head from "../../assets/logos/stablebear-head.svg";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+// Home page URL with a trailing slash, so navbar anchors also work from other pages (like the 404).
+const home = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={head.src} type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href={home}>
+          <img src={head.src} alt="" width="32" height="33" />
+          <span class="wordmark-nav">StableBear</span>
+        </a>
+        <nav aria-label="Main">
+          <a href={`${home}#install`}>Install</a>
+          <a href={`${home}#features`}>Features</a>
+          <a href="https://docs.stablebear.org">Docs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="wrap footer">
+      <p><span class="wordmark-nav">StableBear</span></p>
+      <p><a href="https://docs.stablebear.org">Documentation</a> &middot; [PLACEHOLDER: GitHub link]</p>
+      <p class="small">Fonts: Atkinson Hyperlegible Next and Mono, Inter Tight, under the SIL Open Font License 1.1.</p>
+    </footer>
+  </body>
+</html>

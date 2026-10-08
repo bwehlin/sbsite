@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Page not found | StableBear" description="This page does not exist.">
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1>Page not found.</h1>
+      <p class="lede">There is nothing at this address. The documentation is at docs.stablebear.org.</p>
+      <p class="actions">
+        <a class="button primary" href={import.meta.env.BASE_URL}>Go to the home page</a>
+        <a class="button" href="https://docs.stablebear.org">Read the docs</a>
+      </p>
+    </div>
+  </section>
+</Base>

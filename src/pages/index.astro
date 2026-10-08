@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import Showcase from "../components/Showcase.astro";
+import CopyCommand from "../components/CopyCommand.astro";
+import bear from "../../assets/logos/stablebear-bear.svg";
+---
+
+<Base
+  title="StableBear"
+  description="StableBear is an open-source Python package with a C++/CUDA backend for GPU-accelerated computation on piecewise constant functions."
+>
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1>The next-generation statistics engine for TDA.</h1>
+      <p class="lede">StableBear is built for statistics with topological data analysis (TDA). Typical TDA workloads run highly parallelized and reproducibly, and the results go straight into the tools you already use.</p>
+      <p class="actions">
+        <a class="button primary" href="https://docs.stablebear.org">Read the docs</a>
+        <a class="button" href="#install">Install</a>
+      </p>
+    </div>
+    <img class="hero-bear" src={bear.src} alt="The StableBear bear, sitting cross-legged" width="681" height="613" />
+  </section>
+
+  <section id="install" class="band" aria-labelledby="install-title">
+    <div class="wrap">
+      <h2 id="install-title">Install</h2>
+      <CopyCommand command="pip install stablebear" />
+      <p>Then <code>import stablebear as sb</code> and follow the <a href="https://docs.stablebear.org">documentation</a> for examples.</p>
+    </div>
+  </section>
+
+  <Showcase />
+
+  <section class="wrap" aria-label="Platform">
+    <ul class="cards">
+      <li>
+        <h3>Python, with a C++/CUDA backend</h3>
+        <p>A Python interface over a compiled backend: <code>import stablebear as sb</code>.</p>
+      </li>
+      <li>
+        <h3>GPU-accelerated</h3>
+        <p>The heavy computation runs on CUDA. [PLACEHOLDER: supported GPUs and CPU fallback]</p>
+      </li>
+      <li>
+        <h3>Open source</h3>
+        <p>Source code on [PLACEHOLDER: repository link] under [PLACEHOLDER: licence].</p>
+      </li>
+    </ul>
+  </section>
+</Base>

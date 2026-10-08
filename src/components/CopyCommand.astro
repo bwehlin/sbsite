@@ -1,0 +1,22 @@
+---
+// A shell command with a copy button.
+interface Props {
+  command: string;
+}
+const { command } = Astro.props;
+---
+
+<div class="install">
+  <code>{command}</code>
+  <button type="button" class="button primary" data-copy={command}>Copy</button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((b) =>
+    b.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(b.dataset.copy!);
+      b.textContent = "Copied";
+      setTimeout(() => (b.textContent = "Copy"), 2000);
+    })
+  );
+</script>

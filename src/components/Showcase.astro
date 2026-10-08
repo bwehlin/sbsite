@@ -1,0 +1,87 @@
+---
+// Feature showcase: on desktop the side list stays put while the figures scroll past;
+// the current item gets a progress bar. Narrow screens stack figures with captions.
+import local from "../../assets/highlights/local-topology.svg";
+import ranks from "../../assets/highlights/stable-ranks.svg";
+import betti from "../../assets/highlights/betti-curves.svg";
+import distances from "../../assets/highlights/distances.svg";
+
+const features = [
+  {
+    id: "f-local",
+    img: local,
+    title: "Local topology at every point",
+    text: "Relative subsampling draws repeated samples around each point. StableBear computes their persistence, averages the stable ranks and summarises each point with one number. Here the middle blob stands out from the clumps and the ring.",
+    alt: "A point cloud of three groups: small clumps on the left, a blob in the middle and a noisy ring on the right, each point coloured by the L1 norm of its mean reduced H0 stable rank. The middle blob has the palest, largest values.",
+    link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/relative_subsampling.html", label: "Relative subsampling tutorial" },
+  },
+  {
+    id: "f-ranks",
+    img: ranks,
+    title: "Stable ranks, averaged",
+    text: "Persistence and stable ranks for a whole collection of point clouds in one call, then a mean per class. H1 stable ranks of 100 filled disks (pale) and 100 annuli (gold): the annulus mean keeps a long-lived loop.",
+    alt: "Step functions: faint individual H1 stable ranks and two bold class means. The pale disk mean rises and falls early; the gold annulus mean holds a plateau far to the right.",
+    link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
+  },
+  {
+    id: "f-betti",
+    img: betti,
+    title: "Betti curves",
+    text: "Betti curves come from the same barcodes. The mean H1 Betti curve of the annuli (gold) holds a plateau while the loop lives; the short-lived loops in the disks (pale) die early.",
+    alt: "Step functions: individual H1 Betti curves and two class means. The pale disk mean decays quickly; the gold annulus mean stays at about one over a long range.",
+  },
+  {
+    id: "f-distances",
+    img: distances,
+    title: "Distances and kernels",
+    text: "Pairwise L1 distances between the 200 stable ranks show the two classes as two blocks. Distance matrices and kernels go straight into scikit-learn, PyTorch and other machine learning libraries.",
+    alt: "A 200 by 200 distance matrix: pale blocks of small distances within each class, darker blocks between the classes.",
+  },
+];
+---
+
+<section id="features" class="showcase" aria-labelledby="features-title">
+  <div class="wrap showcase-grid">
+    <div class="showcase-side">
+      <h2 id="features-title">What it computes</h2>
+      <ol class="showcase-nav">
+        {features.map((f, i) => (
+          <li><a href={`#${f.id}`} aria-current={i === 0 ? "true" : "false"}>{f.title}</a></li>
+        ))}
+      </ol>
+    </div>
+    <div class="showcase-panels">
+      {features.map((f) => (
+        <figure class="showcase-panel" id={f.id}>
+          <img src={f.img.src} width={f.img.width} height={f.img.height} alt={f.alt} loading="lazy" />
+          <figcaption>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+            {f.link && <p><a href={f.link.href}>{f.link.label}</a></p>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Mark the item whose figure is at the middle of the viewport, and how far through it we are.
+  const links = document.querySelectorAll<HTMLAnchorElement>(".showcase-nav a");
+  const panels = [...links].map((a) => document.querySelector(a.hash)!);
+
+  function track() {
+    const mid = innerHeight / 2;
+    let current = 0;
+    panels.forEach((p, i) => { if (p.getBoundingClientRect().top <= mid) current = i; });
+    const r = panels[current].getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+    links.forEach((a, i) => {
+      a.setAttribute("aria-current", String(i === current));
+      a.style.setProperty("--progress", i === current ? `${progress * 100}%` : "0%");
+    });
+  }
+  addEventListener("scroll", () => requestAnimationFrame(track), { passive: true });
+  addEventListener("resize", track);
+  track();
+</script>
