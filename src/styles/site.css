@@ -53,7 +53,7 @@ a { color: var(--espresso); }
 .button.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--surface); }
 
 /* Hero */
-.hero { display: grid; grid-template-columns: 3fr 2fr; gap: var(--space-8); align-items: center; padding-block: calc(var(--space-8) * 2); }
+.hero { display: grid; grid-template-columns: 3fr 2fr; gap: calc(var(--space-8) * 1.5); align-items: center; padding-block: calc(var(--space-8) * 2); }
 .hero h1 { font: var(--text-display); margin-bottom: var(--space-4); }
 .lede { color: var(--ink-muted); margin-bottom: var(--space-8); }
 .actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }

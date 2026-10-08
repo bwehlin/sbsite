@@ -11,7 +11,7 @@ import bear from "../../assets/logos/stablebear-bear.svg";
 >
   <section class="hero wrap">
     <div class="hero-text">
-      <h1>The next-generation statistics engine for TDA.</h1>
+      <h1>Next-generation statistics engine for TDA</h1>
       <p class="lede">StableBear is built for statistics with topological data analysis (TDA). Typical TDA workloads run highly parallelized and reproducibly, and the results go straight into the tools you already use.</p>
       <p class="actions">
         <a class="button primary" href="https://docs.stablebear.org">Read the docs</a>
@@ -35,15 +35,11 @@ import bear from "../../assets/logos/stablebear-bear.svg";
     <ul class="cards">
       <li>
         <h3>Python, with a C++/CUDA backend</h3>
-        <p>A Python interface over a compiled backend: <code>import stablebear as sb</code>.</p>
-      </li>
-      <li>
-        <h3>GPU-accelerated</h3>
-        <p>The heavy computation runs on CUDA. [PLACEHOLDER: supported GPUs and CPU fallback]</p>
+        <p>A Python interface over a compiled C++ backend, with work-stealing parallelism on the CPU (<a href="https://taskflow.github.io/">Taskflow</a>) and CUDA acceleration on the GPU: <code>import stablebear as sb</code>.</p>
       </li>
       <li>
         <h3>Open source</h3>
-        <p>Source code on [PLACEHOLDER: repository link] under [PLACEHOLDER: licence].</p>
+        <p>Source code on <a href="https://github.com/kthtda/stablebear">GitHub</a> under the Apache License 2.0.</p>
       </li>
     </ul>
   </section>
