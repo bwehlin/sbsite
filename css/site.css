@@ -2,6 +2,9 @@
 
 * { box-sizing: border-box; }
 
+/* The page is forced light (data-theme="light" on <html>), so keep native controls light too. */
+:root[data-theme="light"] { color-scheme: light; }
+
 body {
   margin: 0;
   background: var(--surface);
