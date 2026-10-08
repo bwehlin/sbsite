@@ -18,6 +18,8 @@ h3 { font: var(--text-h3); margin-bottom: var(--space-2); }
 code { font: var(--text-code); }
 a { color: var(--espresso); }
 :focus-visible { outline: 2px solid var(--espresso); outline-offset: 2px; }
+/* Keep the link inline so its text sits on the line's baseline; nudge the mark down to match. */
+.github svg { vertical-align: -0.125em; margin-right: var(--space-1); }
 
 .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--space-4); }
 .small { font: var(--text-small); color: var(--ink-muted); }

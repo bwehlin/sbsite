@@ -8,6 +8,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@primer/octicons": "19.40.0",
     "astro": "7.3.8"
   }
 }

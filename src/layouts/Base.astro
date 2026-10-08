@@ -4,6 +4,7 @@ import "../../design/fonts.css";
 import "../../design/tokens.css";
 import "../styles/site.css";
 import head from "../../assets/logos/stablebear-head.svg";
+import GitHubLink from "../components/GitHubLink.astro";
 
 interface Props {
   title: string;
@@ -46,7 +47,7 @@ const home = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
     <footer class="wrap footer">
       <p><span class="wordmark-nav">StableBear</span></p>
-      <p><a href="https://docs.stablebear.org">Documentation</a> &middot; <a href="https://github.com/kthtda/stablebear">GitHub</a></p>
+      <p><a href="https://docs.stablebear.org">Documentation</a> &middot; <GitHubLink /></p>
       <p class="small">Fonts: Atkinson Hyperlegible Next and Mono, Inter Tight, under the SIL Open Font License 1.1.</p>
       <p class="small">StableBear is an independent project and is not affiliated with, sponsored by or endorsed by NVIDIA, the PyTorch Foundation, the scikit-learn project, the Taskflow project or the Python Software Foundation. CUDA is a trademark of NVIDIA Corporation, PyTorch is a trademark of The Linux Foundation, and Python is a trademark of the Python Software Foundation. All other trademarks belong to their respective owners.</p>
     </footer>
