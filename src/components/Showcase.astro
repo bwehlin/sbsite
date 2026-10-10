@@ -2,7 +2,7 @@
 // Feature showcase: on desktop the side list stays put while the figures scroll past;
 // the current item gets a progress bar. Narrow screens stack figures with captions.
 import local from "../../assets/highlights/local-topology.svg";
-import ranks from "../../assets/highlights/stable-ranks.svg";
+import featureVectors from "../../assets/highlights/features.svg";
 import distances from "../../assets/highlights/distances.svg";
 // The tensor figures are inlined so they can take the band's colours (see .showcase-tensors).
 import pcTensor from "../../tensorfigures/figures/pointcloud-tensor-3x2.svg?raw";
@@ -47,11 +47,11 @@ const features = [
     link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/relative_subsampling.html", label: "Relative subsampling tutorial" },
   },
   {
-    id: "f-ranks",
-    img: ranks,
-    title: "Stable ranks, averaged",
-    text: "Persistence and stable ranks for a whole collection of point clouds in one call, then a mean per class. H1 stable ranks of 100 filled disks (pale) and 100 annuli (gold): the annulus mean keeps a long-lived loop.",
-    alt: "Step functions: faint individual H1 stable ranks and two bold class means. The pale disk mean rises and falls early; the gold annulus mean holds a plateau far to the right.",
+    id: "f-ml",
+    img: featureVectors,
+    title: "Into existing algorithms",
+    text: "Persistence curves evaluated on a grid become ordinary feature vectors for neural networks and other machine learning models",
+    alt: "A step function that climbs unevenly to a peak and steps back down, sampled at twelve evenly spaced points, the twelve values as a column of cells shaded by size, and the cells wired into a small neural network with six hidden units and two outputs.",
     link: { href: "https://docs.stablebear.org/en/stable/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
   },
   {
