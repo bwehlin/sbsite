@@ -2,6 +2,7 @@
 // Feature showcase: on desktop the side list stays put while the figures scroll past;
 // the current item gets a progress bar. Narrow screens stack figures with captions.
 import local from "../../assets/highlights/local-topology.svg";
+import distances from "../../assets/highlights/distances.svg";
 import featureVectors from "../../assets/highlights/features.svg";
 // The tensor figures are inlined so they can take the band's colours (see .showcase-tensors).
 import pcTensor from "../../tensorfigures/figures/pointcloud-tensor-3x2.svg?raw";
@@ -20,13 +21,13 @@ const steps = [
     id: "f-pointclouds",
     svg: pcTensor,
     title: "Point clouds in a tensor",
-    text: "Point clouds of different sizes can be stored in the same tensor",
+    text: "Point clouds of different sizes can be stored in the same tensor.",
   },
   {
     id: "f-barcodes",
     svg: barcodeTensor,
     title: "Barcodes for all of them",
-    text: "Elementwise parallel computations using state-of-the-art algorithms",
+    text: "Elementwise parallel computations using state-of-the-art algorithms.",
   },
   {
     id: "f-betti-tensor",
@@ -41,15 +42,23 @@ const features = [
     id: "f-local",
     img: local,
     title: "Topological bootstrapping",
-    text: "Advanced bootstrapping capabilities allowing extraction of local and global topology in large datasets",
+    text: "Advanced bootstrapping capabilities allowing extraction of local and global topology in large datasets.",
     alt: "A point cloud of a blob and a noisy ring across the top and small clumps down the left. A chosen point at the right edge of the ring is marked; points near it are gold and turn grey with distance. In the bottom right corner, faint gold H0 stable rank curves of the samples and their bold pale mean.",
     link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/relative_subsampling.html", label: "Relative subsampling tutorial" },
+  },
+  {
+    id: "f-exact",
+    img: distances,
+    title: "Exact representations",
+    text: "Functions are represented without discretization, and computations like distances and kernels are carried out exactly (up to machine precision). Large computations run on the GPU where available.",
+    alt: "Two step functions stepping down to zero, one always above the other until both reach zero, each step drawn with a filled dot where it starts and an open dot where it ends, drawn over each other with the area between them split into rectangles at their steps, the first few from the left shaded, and beside them a 20 by 20 distance matrix shaded by distance, with a dark diagonal.",
+    link: { href: "https://docs.stablebear.org/en/stable/distances.html", label: "Distances guide" },
   },
   {
     id: "f-ml",
     img: featureVectors,
     title: "Into existing algorithms",
-    text: "Persistence curves become feature vectors, distance matrices or kernels for neural networks and other machine learning models",
+    text: "Persistence curves become feature vectors, distance matrices or kernels for neural networks and other machine learning models.",
     alt: "A step function that climbs unevenly to a peak and steps back down, sampled at twelve evenly spaced points, the twelve values as a column of cells shaded by size, and the cells wired into a small neural network with six hidden units and two outputs.",
     link: { href: "https://docs.stablebear.org/en/stable/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
   },

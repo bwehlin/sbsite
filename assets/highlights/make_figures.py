@@ -155,3 +155,83 @@ for (x, y), c in zip(cells, shade):
 ax.scatter(*zip(*hidden), color=S1, s=110, linewidths=0, zorder=3)
 ax.scatter(*zip(*outputs), color=S2, s=140, linewidths=0, zorder=3)
 save(fig, "features.svg")
+
+# 3. Exact representations: the area between two PCFs is the L1 distance, a finite sum of rectangles
+# over their breakpoints. The matrix holds it for every pair of 20 made-up nonincreasing PCFs
+# (like stable ranks), the pictured pair among them.
+rng = np.random.default_rng(3)
+# Most PCFs are random staircases: a few big drops at random places (Dirichlet steps), ending
+# at a random time and scaled to about the same area, so they differ in shape rather than size.
+# The pictured pair is 7 height (1 - t / end)^power, set apart (low and early, high and late)
+# so it never touches.
+n = 20
+pair = (4, 14)
+counts = rng.integers(10, 16, n)  # breakpoints per PCF; the pictured pair has 10 and 15
+counts[list(pair)] = 10, 15
+ends = rng.uniform(0.6, 1.0, n)
+shapes = {pair[0]: (0.75, 1.9, 0.85), pair[1]: (0.95, 0.8, 1.0)}  # height, power, end
+pcfs = sb.zeros((n,))
+for k in range(n):
+    m = counts[k] - 1
+    t = np.r_[0, np.arange(1, m) / m + rng.uniform(-0.3, 0.3, m - 1) / m, 1]
+    if k in shapes:
+        height, power, end = shapes[k]
+        v = 7 * height * (1 - t[:-1]) ** power * rng.uniform(0.9, 1.1, m)
+    else:
+        end = ends[k]
+        v = 1 - np.r_[0, np.cumsum(rng.dirichlet(np.full(m, 0.3)))[:-1]]
+    t = t * end
+    if k not in shapes:
+        v *= 3 * rng.uniform(0.9, 1.1) / np.sum(v * np.diff(t))
+    pcfs[k] = sb.Pcf(np.column_stack([t, np.r_[np.sort(v)[::-1], 0]]).astype(np.float32))
+D = sb.pdist(pcfs)
+matrix = np.array([[D[i, j] if i != j else 0 for j in range(n)] for i in range(n)])
+f, g = pcfs[pair[0]], pcfs[pair[1]]
+check = np.linspace(0, 0.999, 1000, dtype=np.float32)
+assert (np.asarray(g(check)) > np.asarray(f(check))).all(), "the pictured curves must not touch"
+
+fig, ax = figure()
+ax.axis("off")
+ax.set_aspect("equal")
+ax.set_xlim(0, 8)
+ax.set_ylim(0, 5)
+# The two curves and the area between them, scaled into x 0.1-4.1, y 0.6-4.4.
+top = max(np.asarray(f)[:, 1].max(), np.asarray(g)[:, 1].max())
+X = lambda t: 0.1 + 4.0 * t
+Y = lambda v: 0.6 + 3.8 * v / top
+ax.plot([X(0), X(0)], [Y(0), Y(top)], color=MUTED, linewidth=1)
+ax.plot([X(0), X(1)], [Y(0), Y(0)], color=MUTED, linewidth=1)
+# The integral breaks into rectangles between consecutive breakpoints of either PCF: outline
+# them all and shade the first few from the left, as if the sum were partway through.
+rects = [r for r in sb.iterate_rectangles(f, g, b=1) if r.f_value != r.g_value]
+for k, r in enumerate(rects):
+    lo, hi = sorted((r.f_value, r.g_value))
+    box = (X(r.left), Y(lo)), X(r.right) - X(r.left), Y(hi) - Y(lo)
+    if k < 12:  # shaded, outlined in a light palette colour so the dashes show
+        ax.add_patch(plt.Rectangle(*box, facecolor=S2, alpha=0.45, linewidth=0))
+        ax.add_patch(plt.Rectangle(*box, facecolor="none", edgecolor=TOKENS_LIGHT["fur"],
+                                   linewidth=0.8, linestyle=(0, (2, 2))))
+    else:
+        ax.add_patch(plt.Rectangle(*box, facecolor="none", alpha=0.6, edgecolor=MUTED,
+                                   linewidth=0.8, linestyle=(0, (2, 2))))
+# Each step holds on [t_i, t_{i+1}): a filled dot where it starts, an open one where it ends.
+# Both end at height 0, drawn up to t = 1.
+for pcf, colour in ((f, S1), (g, S2)):
+    t, v = np.asarray(pcf).T
+    ax.scatter(X(t[1:]), Y(v[:-1]), facecolor=C["espresso-tint"], edgecolor=colour, s=28,
+               linewidths=1.5, zorder=6)
+    ax.scatter(X(t), Y(v), color=colour, s=28, linewidths=0, zorder=6)
+    if t[-1] < 1:  # carry the final zero step on to t = 1
+        t, v = np.r_[t, 1], np.r_[v, 0]
+    for a, b, h in zip(t[:-1], t[1:], v[:-1]):
+        ax.plot([X(a), X(b)], [Y(h), Y(h)], color=colour, linewidth=2.5, zorder=5)
+# The distance matrix, shaded by distance, in x 4.9-7.9, y 1.0-4.0 (centred on the curves).
+cell = 3.0 / n
+shade = LinearSegmentedColormap.from_list("distance", [C["espresso-tint"], S2])
+lo, hi = np.percentile(matrix[~np.eye(n, dtype=bool)], [2, 98])
+for i in range(n):
+    for j in range(n):
+        x, y = 4.9 + j * cell, 4.0 - (i + 1) * cell
+        ax.add_patch(plt.Rectangle((x, y), cell, cell, facecolor=shade(np.clip((matrix[i, j] - lo) / (hi - lo), 0, 1)),
+                                   edgecolor=MUTED, linewidth=0.3, zorder=3))
+save(fig, "distances.svg")
