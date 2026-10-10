@@ -1,6 +1,6 @@
 """Generate the highlight banner figures (SVG, transparent, for the espresso band).
 
-Run with stablebear 0.5.0 and matplotlib installed:
+Run with stablebear 0.5.1b1 and matplotlib installed:
     python assets/highlights/make_figures.py
 
 Colours come from the dark theme in design/tokens.json, which reads on the
@@ -29,6 +29,11 @@ plt.rcParams.update({"svg.hashsalt": "stablebear", "svg.fonttype": "none"})
 def figure():
     fig, ax = plt.subplots(figsize=SIZE)
     fig.patch.set_alpha(0)
+    style(ax)
+    return fig, ax
+
+
+def style(ax):
     ax.set_facecolor("none")
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
@@ -36,7 +41,6 @@ def figure():
         ax.spines[side].set_color(MUTED)
     ax.set_xticks([])
     ax.set_yticks([])
-    return fig, ax
 
 
 def save(fig, name):
@@ -49,44 +53,59 @@ def steps(ax, pcf, grid, **kw):
     ax.plot(grid, np.asarray(pcf(grid)).ravel(), drawstyle="steps-post", **kw)
 
 
-# 1. Local topology at every point (data and settings from the relative subsampling tutorial).
-# stablebear 0.5.0 has no subsample_relative yet, so the Gaussian-weighted draws
-# (with replacement, duplicates discarded) are done here in NumPy.
+# 1. Bootstrapping local topology: 100 Gaussian-weighted samples around a query point at a
+# ring's right edge (settings from the relative subsampling tutorial). The tutorial's clumps,
+# blob and ring are rearranged to wrap over the top and left, leaving the bottom right for the
+# stable ranks.
 np.random.seed(5)
-centers = np.array([[-2.0, 0.0], [0.0, 0.0], [2.0, 0.0]])
 clumps = np.vstack([
     0.13 * np.random.randn(10, 2) + [-0.8, -0.6],
     0.13 * np.random.randn(10, 2) + [-0.8, 0.6],
     0.13 * np.random.randn(10, 2) + [0.45, 0.0],
-]) + centers[0]
-blob = 0.9 * np.random.randn(120, 2) + centers[1]
+]) + [-2.9, -1.1]
+blob = 0.55 * np.random.randn(120, 2) + [-1.1, 0.9]
 ring = np.random.randn(120, 2)
 ring = 1.1 * ring / np.linalg.norm(ring, axis=1, keepdims=True)
-ring += 0.22 * np.random.randn(120, 2) + centers[2]
-points = np.vstack([clumps, blob, ring]).astype(np.float32)
+ring += 0.22 * np.random.randn(120, 2) + [2.2, 1.3]
+reference = sb.PointCloud(np.vstack([clumps, blob, ring]))
+points = np.asarray(reference)
+query = np.array([3.2, 1.3])
+distribution = sb.distributions.Gaussian(0, 0.5)
 
-rng = np.random.default_rng(6)
-n_samples, n_points, std = 100, 30, 0.5
-d2 = ((points[:, None] - points[None]) ** 2).sum(-1)
-weights = np.exp(-d2 / (2 * std**2))
-weights /= weights.sum(1, keepdims=True)
-samples = sb.zeros((len(points), n_samples), dtype=sb.pcloud32)
-for q in range(len(points)):
-    for s in range(n_samples):
-        idx = np.unique(rng.choice(len(points), n_points, replace=True, p=weights[q]))
-        samples[q, s] = points[idx]
+samples = sb.random.subsample_relative(
+    reference, query=query[None], n_points=30, n_samples=100,
+    replace=True, discard_duplicates=True,
+    distribution=distribution, generator=sb.random.Generator(seed=5),
+)
 ranks = persistence.barcode_to_stable_rank(
-    persistence.compute_persistent_homology(samples, max_dim=0, reduced=True))
-norms = np.asarray(sb.lp_norm(sb.mean(ranks, dim=1)[:, 0], p=1))
+    persistence.compute_persistent_homology(samples, max_dim=0, reduced=True))[0, :, 0]
+# Colour every point by its sampling weight around the query.
+weights = np.asarray(distribution.weight(np.linalg.norm(points - query, axis=1)))
 
+# Point cloud over the whole figure, stable ranks in the bottom right corner.
 fig, ax = figure()
 ax.axis("off")
-# Low norms in deep gold, high norms in pale latte; clip the tails so the contrast reads.
-cmap = LinearSegmentedColormap.from_list("band", [TOKENS_LIGHT["honey-ink"], S2, S1])
-lo, hi = np.percentile(norms, [5, 95])
-order = np.argsort(norms)
-ax.scatter(*points[order].T, c=norms[order], cmap=cmap, vmin=lo, vmax=hi, s=30, linewidths=0)
+ax.set_position([0, 0, 1, 1])
+# Unlikely points muted, likely ones solid gold; the query in latte.
+cmap = LinearSegmentedColormap.from_list("weight", [MUTED, S2])
+t = np.clip(weights / np.percentile(weights, 99), 0, 1)
+colours = cmap(t)
+colours[:, 3] = 0.6 + 0.4 * t
+order = np.argsort(weights)
+ax.scatter(*points[order].T, c=colours[order], s=30, linewidths=0)
+ax.scatter(*query, color=S1, s=140, edgecolors=TOKENS_LIGHT["espresso"], linewidths=2)
 ax.set_aspect("equal")
+ax.set_xlim(-4, 4)
+ax.set_ylim(-2.4, 2.9)
+
+curves = fig.add_axes([0.52, 0.04, 0.46, 0.36])
+style(curves)
+grid = np.linspace(0, 0.6, 600, dtype=np.float32)
+for s in range(20):
+    steps(curves, ranks[s], grid, color=S2, alpha=0.3, linewidth=1)
+steps(curves, sb.mean(ranks), grid, color=S1, linewidth=3)
+curves.set_xlim(grid[0], grid[-1])
+curves.set_ylim(bottom=0)
 save(fig, "local-topology.svg")
 
 # 2-4. Disk vs annulus point clouds (from the PyTorch classifier tutorial).
