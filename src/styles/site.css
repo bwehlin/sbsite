@@ -54,6 +54,20 @@ a { color: var(--espresso); }
 .button.primary { background: var(--espresso); color: var(--on-espresso); }
 .button.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--surface); }
 
+/* Stacking: each section in .stack sticks when its bottom reaches the bottom of the window
+   and the next one slides over it, leaving a --peek strip of each earlier section in view
+   (offsets set in index.astro). The stack ends with the showcase, so nothing covers it.
+   Off under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .stack { --peek: var(--space-4); }
+  .stack > section { position: sticky; top: var(--stick, 0px); }
+  /* Full width, so no older section shows at the sides; rounded top corners mark the edge. */
+  .stack > section + section { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .stack > .showcase { margin-inline: 0; border-radius: var(--radius-lg); }
+}
+:where(.stack > section) { background: var(--surface); }
+.no-stick .stack > section { position: static; }
+
 /* Hero */
 .hero { display: grid; grid-template-columns: 3fr 2fr; gap: calc(var(--space-8) * 1.5); align-items: center; padding-block: calc(var(--space-8) * 2); }
 .hero h1 { font: var(--text-display); margin-bottom: var(--space-4); }
