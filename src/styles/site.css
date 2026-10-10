@@ -30,7 +30,8 @@ a { color: var(--espresso); }
 .wordmark-nav { font: var(--text-wordmark-nav); letter-spacing: var(--wordmark-tracking); color: var(--ink); }
 
 /* Navbar */
-.nav { border-bottom: 1px solid var(--border); }
+/* Fixed at the top; index.astro puts its height in --nav-h for the sticky parts below it. */
+.nav { position: sticky; top: 0; z-index: 1; background: var(--surface); border-bottom: 1px solid var(--border); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-4); flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; }
 .nav nav { display: flex; gap: var(--space-4); }
@@ -81,7 +82,7 @@ a { color: var(--espresso); }
 .showcase a { color: var(--on-espresso); }
 .showcase :focus-visible { outline-color: var(--honey); }
 .showcase-grid { display: grid; grid-template-columns: 22rem 1fr; gap: calc(var(--space-8) * 2); align-items: start; }
-.showcase-side { position: sticky; top: calc(var(--space-8) * 2); }
+.showcase-side { position: sticky; top: calc(var(--nav-h, 0px) + var(--space-8) * 2); }
 .showcase-nav { list-style: none; padding: 0; margin: 0; }
 .showcase-nav a { position: relative; display: block; text-decoration: none; padding-block: var(--space-4) var(--space-2); box-shadow: inset 0 -1px 0 var(--espresso-tint); }
 .showcase-nav a:not([aria-current="true"]) { opacity: 0.8; }

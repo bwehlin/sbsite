@@ -54,12 +54,16 @@ import bear from "../../assets/logos/stablebear-bear.svg";
   // Each stacked section sticks once its bottom reaches the bottom of the window, so the next
   // one slides over it. Section i stops i peeks down, so the top strip of every earlier
   // section stays in view. The stack ends with the showcase, which then scrolls away as usual.
+  // Everything stops below the fixed navbar, whose height goes in --nav-h.
+  const nav = document.querySelector<HTMLElement>(".nav")!;
   const stack = document.querySelector(".stack")!;
   const sections = [...stack.querySelectorAll<HTMLElement>(":scope > section")];
   const peek = () => parseFloat(getComputedStyle(stack).getPropertyValue("--peek")) || 0;
   function stick() {
+    const navH = nav.offsetHeight;
+    document.documentElement.style.setProperty("--nav-h", `${navH}px`);
     sections.forEach((s, i) =>
-      s.style.setProperty("--stick", `${Math.min(i * peek(), innerHeight - s.offsetHeight)}px`));
+      s.style.setProperty("--stick", `${Math.min(navH + i * peek(), innerHeight - s.offsetHeight)}px`));
   }
   new ResizeObserver(stick).observe(document.body);
   addEventListener("resize", stick);
@@ -75,7 +79,7 @@ import bear from "../../assets/logos/stablebear-bear.svg";
     // Keep clear of the strips of the sections stacked above the target's own.
     const stacked = sections.findIndex((s) => s.contains(target)) * peek();
     const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-    const top = scrollY + target.getBoundingClientRect().top - margin - Math.max(0, stacked);
+    const top = scrollY + target.getBoundingClientRect().top - margin - Math.max(0, stacked) - nav.offsetHeight;
     document.documentElement.classList.remove("no-stick");
     scrollTo({ top });
     history.pushState(null, "", a.hash);
