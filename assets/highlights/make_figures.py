@@ -108,7 +108,7 @@ curves.set_xlim(grid[0], grid[-1])
 curves.set_ylim(bottom=0)
 save(fig, "local-topology.svg")
 
-# 2-4. Disk vs annulus point clouds (from the PyTorch classifier tutorial).
+# 2-3. Disk vs annulus point clouds (from the PyTorch classifier tutorial).
 rng = np.random.default_rng(42)
 
 
@@ -188,11 +188,3 @@ for lo, colour in ((0, S1), (half, S2)):
 ax.set_xlim(grid[0], grid[-1])
 ax.set_ylim(bottom=0)
 save(fig, "betti-curves.svg")
-
-# 4. Pairwise L1 distances between H1 stable ranks: two classes, two blocks.
-dist = np.asarray(sb.pdist(h1_ranks, p=1))
-fig, ax = figure()
-ax.axis("off")
-ax.imshow(dist, cmap=LinearSegmentedColormap.from_list("dist", [S1, S2, C["surface"]]),
-          interpolation="nearest")
-save(fig, "distances.svg")

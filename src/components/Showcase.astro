@@ -3,7 +3,6 @@
 // the current item gets a progress bar. Narrow screens stack figures with captions.
 import local from "../../assets/highlights/local-topology.svg";
 import featureVectors from "../../assets/highlights/features.svg";
-import distances from "../../assets/highlights/distances.svg";
 // The tensor figures are inlined so they can take the band's colours (see .showcase-tensors).
 import pcTensor from "../../tensorfigures/figures/pointcloud-tensor-3x2.svg?raw";
 import barcodeTensor from "../../tensorfigures/figures/barcode-tensor-3x2x2-boxes.svg?raw";
@@ -50,16 +49,9 @@ const features = [
     id: "f-ml",
     img: featureVectors,
     title: "Into existing algorithms",
-    text: "Persistence curves evaluated on a grid become ordinary feature vectors for neural networks and other machine learning models",
+    text: "Persistence curves become feature vectors, distance matrices or kernels for neural networks and other machine learning models",
     alt: "A step function that climbs unevenly to a peak and steps back down, sampled at twelve evenly spaced points, the twelve values as a column of cells shaded by size, and the cells wired into a small neural network with six hidden units and two outputs.",
     link: { href: "https://docs.stablebear.org/en/stable/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
-  },
-  {
-    id: "f-distances",
-    img: distances,
-    title: "Distances and kernels",
-    text: "Pairwise L1 distances between the 200 stable ranks show the two classes as two blocks. Distance matrices and kernels go straight into scikit-learn, PyTorch and other machine learning libraries.",
-    alt: "A 200 by 200 distance matrix: pale blocks of small distances within each class, darker blocks between the classes.",
   },
 ];
 ---
