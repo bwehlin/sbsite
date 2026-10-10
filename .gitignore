@@ -5,3 +5,4 @@ _docs_copy
 node_modules
 dist
 .astro
+__pycache__/

@@ -4,10 +4,15 @@ Writes figures/pointcloud-tensor-3x2.svg
 """
 import numpy as np, math
 from clouds import cells
-S=200; K=0.42; A=math.radians(35)
+# Same projection as the barcode and Betti figures, so the three line up and the next
+# tensor reads as this block grown one cell deeper.
+S=150; K=0.62; A=math.radians(35)
 NR,NC=3,2
+ND_NEXT=2   # depth of the (3, 2, 2) tensors that follow; the viewBox leaves room for it
+Z0=ND_NEXT-1   # sit in their back layer, so the next tensors grow a layer in front
 ZC=0.0   # centre each cloud on its cell's front face (z=0), which reads as centred
-def P(x,y,z): return (x*S + z*K*S*math.cos(A), -y*S - z*K*S*math.sin(A))
+def P0(x,y,z): return (x*S + z*K*S*math.cos(A), -y*S - z*K*S*math.sin(A))
+def P(x,y,z): return P0(x,y,z+Z0)
 def pts_str(ps): return ' '.join('%.1f,%.1f'%P(*p) for p in ps)
 def poly(ps,cls): return '<polygon class="%s" points="%s"/>'%(cls,pts_str(ps))
 def line(a,b,cls):
@@ -43,7 +48,7 @@ allp=np.vstack(allp); order=np.argsort(-allp[:,2])
 pts=[]
 for k in order:
     x,y,z=allp[k]; px,py=P(x,y,z); t=1-z
-    pts.append('<circle class="pt%s" cx="%.1f" cy="%.1f" r="%.2f"/>'%(' far' if t<0.45 else '',px,py,2.0+2.0*t))
+    pts.append('<circle class="pt%s" cx="%.1f" cy="%.1f" r="%.2f"/>'%(' far' if t<0.45 else '',px,py,(2.0+2.0*t)*S/200))
 front=[]
 front.append(poly([(W_,0,0),(W_,0,1),(W_,H_,1),(W_,H_,0)],'face side'))
 front.append(poly([(0,H_,0),(W_,H_,0),(W_,H_,1),(0,H_,1)],'face top'))
@@ -54,8 +59,8 @@ for x in range(0,W_+1): front.append(line((x,H_,0),(x,H_,1),'edge'))   # top fac
 front.append(line((0,H_,1),(W_,H_,1),'edge'))
 for y in range(0,H_): front.append(line((W_,y,0),(W_,y,1),'edge'))     # right face depth lines
 front.append(line((W_,0,1),(W_,H_,1),'edge'))
-xs=[P(x,y,z)[0] for x in (0,W_) for y in (0,H_) for z in (0,1)]
-ys=[P(x,y,z)[1] for x in (0,W_) for y in (0,H_) for z in (0,1)]
+xs=[P0(x,y,z)[0] for x in (0,W_) for y in (0,H_) for z in (0,ND_NEXT)]
+ys=[P0(x,y,z)[1] for x in (0,W_) for y in (0,H_) for z in (0,ND_NEXT)]
 pad=12; x0,x1,y0,y1=min(xs)-pad,max(xs)+pad,min(ys)-pad,max(ys)+pad
 svg=f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x0:.0f} {y0:.0f} {x1-x0:.0f} {y1-y0:.0f}" width="{x1-x0:.0f}" height="{y1-y0:.0f}" role="img" aria-labelledby="t d">
 <title id="t">A StableBear PointCloudTensor of shape (3, 2)</title>

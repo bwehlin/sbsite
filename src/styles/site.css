@@ -76,7 +76,10 @@ a { color: var(--espresso); }
 .showcase-nav a { font: var(--text-h3); }
 .showcase-panel { margin: 0; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; scroll-margin-top: var(--space-8); }
 .showcase-panel img { width: 100%; height: 24rem; object-fit: contain; }
-.showcase-panel img.on-light { background: var(--surface); border-radius: var(--radius-lg); padding: var(--space-4); }
+/* Tensor pipeline: three figures side by side. The inlined SVGs read --ink and --espresso,
+   so point them at the band's light colours. */
+.showcase-tensors { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: var(--space-8); --ink: var(--on-espresso); --espresso: var(--espresso-tint); }
+.showcase-tensors svg { display: block; width: 100%; height: auto; max-height: 20rem; margin-bottom: var(--space-4); }
 .showcase-panel figcaption { margin-top: var(--space-4); max-width: 40rem; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 /* Too narrow or too short for the sticky layout: stack figures with their captions. */
