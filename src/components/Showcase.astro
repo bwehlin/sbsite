@@ -3,10 +3,37 @@
 // the current item gets a progress bar. Narrow screens stack figures with captions.
 import local from "../../assets/highlights/local-topology.svg";
 import ranks from "../../assets/highlights/stable-ranks.svg";
-import betti from "../../assets/highlights/betti-curves.svg";
 import distances from "../../assets/highlights/distances.svg";
+// The tensor figures are drawn in light-theme colours, so they sit on a light panel.
+import pcTensor from "../../tensorfigures/figures/pointcloud-tensor-3x2.svg";
+import barcodeTensor from "../../tensorfigures/figures/barcode-tensor-3x2x2-boxes.svg";
+import bettiTensor from "../../tensorfigures/figures/betti-tensor-3x2x2.svg";
 
 const features = [
+  {
+    id: "f-pointclouds",
+    img: pcTensor,
+    light: true,
+    title: "Point clouds in a tensor",
+    text: "A PointCloudTensor holds a whole collection of point clouds, one per element. This one has shape (3, 2): a circle, a torus, a sphere, three clusters, a helix and uniform noise.",
+    alt: "A block of six glass cells in 3 rows and 2 columns. Each cell holds its own point cloud: a circle, a torus, a sphere, three clusters, a helix and uniform noise.",
+  },
+  {
+    id: "f-barcodes",
+    img: barcodeTensor,
+    light: true,
+    title: "Barcodes for all of them",
+    text: "One call to compute_persistent_homology(X, max_dim=1) gives a BarcodeTensor of shape (3, 2, 2): the H0 and H1 barcodes of every point cloud, with H1 in front and H0 behind.",
+    alt: "A block of glass cells, 3 rows by 2 columns by 2 deep. Each cell holds one persistence barcode, its bars drawn as 3D boxes: dark H1 bars in the front layer, faint honey H0 bars in the back layer.",
+  },
+  {
+    id: "f-betti-tensor",
+    img: bettiTensor,
+    light: true,
+    title: "Betti curves as a tensor",
+    text: "barcode_to_betti_curve turns the barcodes into a PcfTensor of the same shape: one Betti curve, a piecewise constant function, per barcode.",
+    alt: "A block of glass cells, 3 rows by 2 columns by 2 deep. Each cell holds one Betti curve as a step function: dark H1 curves in front, faint honey H0 curves behind.",
+  },
   {
     id: "f-local",
     img: local,
@@ -22,13 +49,6 @@ const features = [
     text: "Persistence and stable ranks for a whole collection of point clouds in one call, then a mean per class. H1 stable ranks of 100 filled disks (pale) and 100 annuli (gold): the annulus mean keeps a long-lived loop.",
     alt: "Step functions: faint individual H1 stable ranks and two bold class means. The pale disk mean rises and falls early; the gold annulus mean holds a plateau far to the right.",
     link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
-  },
-  {
-    id: "f-betti",
-    img: betti,
-    title: "Betti curves",
-    text: "Betti curves come from the same barcodes. The mean H1 Betti curve of the annuli (gold) holds a plateau while the loop lives; the short-lived loops in the disks (pale) die early.",
-    alt: "Step functions: individual H1 Betti curves and two class means. The pale disk mean decays quickly; the gold annulus mean stays at about one over a long range.",
   },
   {
     id: "f-distances",
@@ -53,7 +73,7 @@ const features = [
     <div class="showcase-panels">
       {features.map((f) => (
         <figure class="showcase-panel" id={f.id}>
-          <img src={f.img.src} width={f.img.width} height={f.img.height} alt={f.alt} loading="lazy" />
+          <img class:list={{ "on-light": f.light }} src={f.img.src} width={f.img.width} height={f.img.height} alt={f.alt} loading="lazy" />
           <figcaption>
             <h3>{f.title}</h3>
             <p>{f.text}</p>

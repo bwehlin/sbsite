@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -569 476 581" width="476" height="581" role="img" aria-labelledby="t d">
+<title id="t">A StableBear BarcodeTensor of shape (3, 2, 2)</title>
+<desc id="d">A block of glass cells, 3 rows by 2 columns by 2 deep. Each cell holds one persistence barcode. The front layer holds the H1 barcodes and the back layer the H0 barcodes of six point clouds: a circle, a torus, a sphere, three clusters, a helix and uniform noise.</desc>
+<style>
+  svg { --sb-ink: var(--ink, #16110d); --sb-h1: var(--espresso, #3b2a20); --sb-h0: var(--honey, #d9a441); --sb-glass: var(--fur, #d9c6b0); }
+  @media (prefers-color-scheme: dark) { svg { --sb-ink: var(--ink, #f0e9e0); --sb-h1: var(--espresso, #e8d5bf); --sb-h0: var(--honey, #e5b45a); --sb-glass: #8a7a68; } }
+  .backwall { fill: var(--sb-glass); opacity: .16; }
+  .floor { fill: var(--sb-glass); opacity: .42; }
+  .leftwall { fill: var(--sb-glass); opacity: .10; }
+  .midwall { fill: var(--sb-glass); opacity: .10; }
+  .face { fill: var(--sb-glass); } .front { opacity: .10; } .side { opacity: .28; } .top { opacity: .22; }
+  .edge { stroke: var(--sb-ink); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; opacity: .8; }
+  .edge-inner { stroke: var(--sb-ink); stroke-width: 1; opacity: .28; }
+  .edge-back { stroke: var(--sb-ink); stroke-width: 1; stroke-dasharray: 3 4; opacity: .28; }
+  .bar { stroke: none; }
+  .h0 { fill: var(--sb-h0); } .layer-h0 { opacity: .7; }
+  .h1 { fill: var(--sb-h1); } .layer-h1 { opacity: .95; }
+  .hilite { fill: #fff; opacity: .35; }
+  .shade { fill: #000; opacity: .22; }
+</style>
+<polygon class="backwall" points="152.4,-106.7 452.4,-106.7 452.4,-556.7 152.4,-556.7"/>
+<polygon class="floor" points="0.0,0.0 300.0,0.0 452.4,-106.7 152.4,-106.7"/>
+<polygon class="leftwall" points="0.0,0.0 152.4,-106.7 152.4,-556.7 0.0,-450.0"/>
+<line class="edge-back" x1="152.4" y1="-106.7" x2="152.4" y2="-556.7"/>
+<line class="edge-back" x1="302.4" y1="-106.7" x2="302.4" y2="-556.7"/>
+<line class="edge-back" x1="452.4" y1="-106.7" x2="452.4" y2="-556.7"/>
+<line class="edge-back" x1="152.4" y1="-106.7" x2="452.4" y2="-106.7"/>
+<line class="edge-back" x1="152.4" y1="-256.7" x2="452.4" y2="-256.7"/>
+<line class="edge-back" x1="152.4" y1="-406.7" x2="452.4" y2="-406.7"/>
+<line class="edge-back" x1="152.4" y1="-556.7" x2="452.4" y2="-556.7"/>
+<line class="edge-back" x1="0.0" y1="0.0" x2="76.2" y2="-53.3"/>
+<line class="edge-back" x1="76.2" y1="-53.3" x2="152.4" y2="-106.7"/>
+<line class="edge-back" x1="0.0" y1="-150.0" x2="152.4" y2="-256.7"/>
+<line class="edge-back" x1="0.0" y1="-300.0" x2="152.4" y2="-406.7"/>
+<line class="edge-back" x1="150.0" y1="0.0" x2="302.4" y2="-106.7"/>
+<line class="edge-back" x1="76.2" y1="-53.3" x2="376.2" y2="-53.3"/>
+<line class="edge-back" x1="76.2" y1="-53.3" x2="76.2" y2="-503.3"/>
+<g class="layer-h0"><polygon class="bar h0 inf" points="115.2,-468.8 187.2,-468.8 187.2,-472.2 115.2,-472.2"/>
+<polygon class="bar h0" points="115.2,-463.2 179.5,-463.2 179.5,-466.6 115.2,-466.6"/>
+<polygon class="bar h0" points="115.2,-457.6 178.2,-457.6 178.2,-461.0 115.2,-461.0"/>
+<polygon class="bar h0" points="115.2,-452.0 173.0,-452.0 173.0,-455.3 115.2,-455.3"/>
+<polygon class="bar h0" points="115.2,-446.3 170.9,-446.3 170.9,-449.7 115.2,-449.7"/>
+<polygon class="bar h0" points="115.2,-440.7 167.1,-440.7 167.1,-444.1 115.2,-444.1"/>
+<polygon class="bar h0" points="115.2,-435.1 166.1,-435.1 166.1,-438.5 115.2,-438.5"/>
+<polygon class="bar h0" points="115.2,-429.5 165.5,-429.5 165.5,-432.8 115.2,-432.8"/>
+<polygon class="bar h0" points="115.2,-423.8 164.3,-423.8 164.3,-427.2 115.2,-427.2"/>
+<polygon class="bar h0" points="115.2,-418.2 164.1,-418.2 164.1,-421.6 115.2,-421.6"/>
+<polygon class="bar h0" points="115.2,-412.6 163.7,-412.6 163.7,-416.0 115.2,-416.0"/>
+<polygon class="bar h0" points="115.2,-407.0 162.6,-407.0 162.6,-410.3 115.2,-410.3"/>
+<polygon class="bar h0" points="115.2,-401.3 162.4,-401.3 162.4,-404.7 115.2,-404.7"/>
+<polygon class="bar h0" points="115.2,-395.7 162.1,-395.7 162.1,-399.1 115.2,-399.1"/>
+<polygon class="bar h0" points="115.2,-390.1 161.3,-390.1 161.3,-393.5 115.2,-393.5"/>
+<polygon class="bar h0" points="115.2,-384.5 160.1,-384.5 160.1,-387.8 115.2,-387.8"/>
+<polygon class="bar h0 inf" points="265.2,-468.8 337.2,-468.8 337.2,-472.2 265.2,-472.2"/>
+<polygon class="bar h0" points="265.2,-463.2 329.5,-463.2 329.5,-466.6 265.2,-466.6"/>
+<polygon class="bar h0" points="265.2,-457.6 327.4,-457.6 327.4,-461.0 265.2,-461.0"/>
+<polygon class="bar h0" points="265.2,-452.0 326.6,-452.0 326.6,-455.3 265.2,-455.3"/>
+<polygon class="bar h0" points="265.2,-446.3 323.5,-446.3 323.5,-449.7 265.2,-449.7"/>
+<polygon class="bar h0" points="265.2,-440.7 323.1,-440.7 323.1,-444.1 265.2,-444.1"/>
+<polygon class="bar h0" points="265.2,-435.1 322.8,-435.1 322.8,-438.5 265.2,-438.5"/>
+<polygon class="bar h0" points="265.2,-429.5 320.2,-429.5 320.2,-432.8 265.2,-432.8"/>
+<polygon class="bar h0" points="265.2,-423.8 319.6,-423.8 319.6,-427.2 265.2,-427.2"/>
+<polygon class="bar h0" points="265.2,-418.2 318.4,-418.2 318.4,-421.6 265.2,-421.6"/>
+<polygon class="bar h0" points="265.2,-412.6 316.5,-412.6 316.5,-416.0 265.2,-416.0"/>
+<polygon class="bar h0" points="265.2,-407.0 316.0,-407.0 316.0,-410.3 265.2,-410.3"/>
+<polygon class="bar h0" points="265.2,-401.3 315.8,-401.3 315.8,-404.7 265.2,-404.7"/>
+<polygon class="bar h0" points="265.2,-395.7 314.1,-395.7 314.1,-399.1 265.2,-399.1"/>
+<polygon class="bar h0" points="265.2,-390.1 313.5,-390.1 313.5,-393.5 265.2,-393.5"/>
+<polygon class="bar h0" points="265.2,-384.5 313.0,-384.5 313.0,-387.8 265.2,-387.8"/>
+<polygon class="bar h0 inf" points="115.2,-318.8 187.2,-318.8 187.2,-322.2 115.2,-322.2"/>
+<polygon class="bar h0" points="115.2,-313.2 179.5,-313.2 179.5,-316.6 115.2,-316.6"/>
+<polygon class="bar h0" points="115.2,-307.6 178.9,-307.6 178.9,-311.0 115.2,-311.0"/>
+<polygon class="bar h0" points="115.2,-302.0 174.6,-302.0 174.6,-305.3 115.2,-305.3"/>
+<polygon class="bar h0" points="115.2,-296.3 172.0,-296.3 172.0,-299.7 115.2,-299.7"/>
+<polygon class="bar h0" points="115.2,-290.7 170.7,-290.7 170.7,-294.1 115.2,-294.1"/>
+<polygon class="bar h0" points="115.2,-285.1 170.6,-285.1 170.6,-288.5 115.2,-288.5"/>
+<polygon class="bar h0" points="115.2,-279.5 170.1,-279.5 170.1,-282.8 115.2,-282.8"/>
+<polygon class="bar h0" points="115.2,-273.8 169.8,-273.8 169.8,-277.2 115.2,-277.2"/>
+<polygon class="bar h0" points="115.2,-268.2 169.6,-268.2 169.6,-271.6 115.2,-271.6"/>
+<polygon class="bar h0" points="115.2,-262.6 169.2,-262.6 169.2,-266.0 115.2,-266.0"/>
+<polygon class="bar h0" points="115.2,-257.0 169.1,-257.0 169.1,-260.3 115.2,-260.3"/>
+<polygon class="bar h0" points="115.2,-251.3 168.5,-251.3 168.5,-254.7 115.2,-254.7"/>
+<polygon class="bar h0" points="115.2,-245.7 168.2,-245.7 168.2,-249.1 115.2,-249.1"/>
+<polygon class="bar h0" points="115.2,-240.1 168.0,-240.1 168.0,-243.5 115.2,-243.5"/>
+<polygon class="bar h0" points="115.2,-234.5 167.6,-234.5 167.6,-237.8 115.2,-237.8"/>
+<polygon class="bar h0 inf" points="265.2,-318.8 337.2,-318.8 337.2,-322.2 265.2,-322.2"/>
+<polygon class="bar h0" points="265.2,-313.2 329.5,-313.2 329.5,-316.6 265.2,-316.6"/>
+<polygon class="bar h0" points="265.2,-307.6 301.2,-307.6 301.2,-311.0 265.2,-311.0"/>
+<polygon class="bar h0" points="265.2,-302.0 293.3,-302.0 293.3,-305.3 265.2,-305.3"/>
+<polygon class="bar h0" points="265.2,-296.3 291.2,-296.3 291.2,-299.7 265.2,-299.7"/>
+<polygon class="bar h0" points="265.2,-290.7 291.0,-290.7 291.0,-294.1 265.2,-294.1"/>
+<polygon class="bar h0" points="265.2,-285.1 289.2,-285.1 289.2,-288.5 265.2,-288.5"/>
+<polygon class="bar h0" points="265.2,-279.5 288.6,-279.5 288.6,-282.8 265.2,-282.8"/>
+<polygon class="bar h0" points="265.2,-273.8 287.8,-273.8 287.8,-277.2 265.2,-277.2"/>
+<polygon class="bar h0" points="265.2,-268.2 286.3,-268.2 286.3,-271.6 265.2,-271.6"/>
+<polygon class="bar h0" points="265.2,-262.6 286.2,-262.6 286.2,-266.0 265.2,-266.0"/>
+<polygon class="bar h0" points="265.2,-257.0 285.8,-257.0 285.8,-260.3 265.2,-260.3"/>
+<polygon class="bar h0" points="265.2,-251.3 285.7,-251.3 285.7,-254.7 265.2,-254.7"/>
+<polygon class="bar h0" points="265.2,-245.7 284.9,-245.7 284.9,-249.1 265.2,-249.1"/>
+<polygon class="bar h0" points="265.2,-240.1 284.7,-240.1 284.7,-243.5 265.2,-243.5"/>
+<polygon class="bar h0" points="265.2,-234.5 283.6,-234.5 283.6,-237.8 265.2,-237.8"/>
+<polygon class="bar h0 inf" points="115.2,-168.8 187.2,-168.8 187.2,-172.2 115.2,-172.2"/>
+<polygon class="bar h0" points="115.2,-163.2 179.5,-163.2 179.5,-166.6 115.2,-166.6"/>
+<polygon class="bar h0" points="115.2,-157.6 171.7,-157.6 171.7,-161.0 115.2,-161.0"/>
+<polygon class="bar h0" points="115.2,-152.0 167.4,-152.0 167.4,-155.3 115.2,-155.3"/>
+<polygon class="bar h0" points="115.2,-146.3 163.9,-146.3 163.9,-149.7 115.2,-149.7"/>
+<polygon class="bar h0" points="115.2,-140.7 163.1,-140.7 163.1,-144.1 115.2,-144.1"/>
+<polygon class="bar h0" points="115.2,-135.1 160.6,-135.1 160.6,-138.5 115.2,-138.5"/>
+<polygon class="bar h0" points="115.2,-129.5 158.4,-129.5 158.4,-132.8 115.2,-132.8"/>
+<polygon class="bar h0" points="115.2,-123.8 158.3,-123.8 158.3,-127.2 115.2,-127.2"/>
+<polygon class="bar h0" points="115.2,-118.2 157.7,-118.2 157.7,-121.6 115.2,-121.6"/>
+<polygon class="bar h0" points="115.2,-112.6 155.3,-112.6 155.3,-116.0 115.2,-116.0"/>
+<polygon class="bar h0" points="115.2,-107.0 152.2,-107.0 152.2,-110.3 115.2,-110.3"/>
+<polygon class="bar h0" points="115.2,-101.3 150.3,-101.3 150.3,-104.7 115.2,-104.7"/>
+<polygon class="bar h0" points="115.2,-95.7 148.8,-95.7 148.8,-99.1 115.2,-99.1"/>
+<polygon class="bar h0" points="115.2,-90.1 148.5,-90.1 148.5,-93.5 115.2,-93.5"/>
+<polygon class="bar h0" points="115.2,-84.5 147.1,-84.5 147.1,-87.8 115.2,-87.8"/>
+<polygon class="bar h0 inf" points="265.2,-168.8 337.2,-168.8 337.2,-172.2 265.2,-172.2"/>
+<polygon class="bar h0" points="265.2,-163.2 329.5,-163.2 329.5,-166.6 265.2,-166.6"/>
+<polygon class="bar h0" points="265.2,-157.6 329.4,-157.6 329.4,-161.0 265.2,-161.0"/>
+<polygon class="bar h0" points="265.2,-152.0 326.6,-152.0 326.6,-155.3 265.2,-155.3"/>
+<polygon class="bar h0" points="265.2,-146.3 325.4,-146.3 325.4,-149.7 265.2,-149.7"/>
+<polygon class="bar h0" points="265.2,-140.7 323.9,-140.7 323.9,-144.1 265.2,-144.1"/>
+<polygon class="bar h0" points="265.2,-135.1 322.8,-135.1 322.8,-138.5 265.2,-138.5"/>
+<polygon class="bar h0" points="265.2,-129.5 320.8,-129.5 320.8,-132.8 265.2,-132.8"/>
+<polygon class="bar h0" points="265.2,-123.8 319.6,-123.8 319.6,-127.2 265.2,-127.2"/>
+<polygon class="bar h0" points="265.2,-118.2 319.1,-118.2 319.1,-121.6 265.2,-121.6"/>
+<polygon class="bar h0" points="265.2,-112.6 317.6,-112.6 317.6,-116.0 265.2,-116.0"/>
+<polygon class="bar h0" points="265.2,-107.0 315.4,-107.0 315.4,-110.3 265.2,-110.3"/>
+<polygon class="bar h0" points="265.2,-101.3 315.2,-101.3 315.2,-104.7 265.2,-104.7"/>
+<polygon class="bar h0" points="265.2,-95.7 315.0,-95.7 315.0,-99.1 265.2,-99.1"/>
+<polygon class="bar h0" points="265.2,-90.1 314.3,-90.1 314.3,-93.5 265.2,-93.5"/>
+<polygon class="bar h0" points="265.2,-84.5 314.1,-84.5 314.1,-87.8 265.2,-87.8"/></g>
+<polygon class="midwall" points="76.2,-53.3 376.2,-53.3 376.2,-503.3 76.2,-503.3"/>
+<line class="edge-inner" x1="150.0" y1="-150.0" x2="302.4" y2="-256.7"/>
+<line class="edge-inner" x1="150.0" y1="-300.0" x2="302.4" y2="-406.7"/>
+<line class="edge-inner" x1="226.2" y1="-53.3" x2="226.2" y2="-503.3"/>
+<line class="edge-inner" x1="76.2" y1="-203.3" x2="376.2" y2="-203.3"/>
+<line class="edge-inner" x1="76.2" y1="-353.3" x2="376.2" y2="-353.3"/>
+<g class="layer-h1"><polygon class="bar h1" points="46.2,-385.4 48.0,-385.4 48.0,-394.6 46.2,-394.6"/>
+<polygon class="bar h1" points="49.5,-370.4 103.8,-370.4 103.8,-379.7 49.5,-379.7"/>
+<polygon class="bar h1" points="49.8,-355.4 51.6,-355.4 51.6,-364.6 49.8,-364.6"/>
+<polygon class="bar h1" points="200.5,-407.8 228.0,-407.8 228.0,-417.1 200.5,-417.1"/>
+<polygon class="bar h1" points="200.6,-392.8 249.5,-392.8 249.5,-402.1 200.6,-402.1"/>
+<polygon class="bar h1" points="202.6,-377.8 218.2,-377.8 218.2,-387.1 202.6,-387.1"/>
+<polygon class="bar h1" points="205.8,-362.8 221.0,-362.8 221.0,-372.1 205.8,-372.1"/>
+<polygon class="bar h1" points="206.9,-347.8 223.4,-347.8 223.4,-357.1 206.9,-357.1"/>
+<polygon class="bar h1" points="207.1,-332.8 221.0,-332.8 221.0,-342.1 207.1,-342.1"/>
+<polygon class="bar h1" points="58.0,-257.9 85.4,-257.9 85.4,-267.2 58.0,-267.2"/>
+<polygon class="bar h1" points="58.3,-242.8 92.0,-242.8 92.0,-252.2 58.3,-252.2"/>
+<polygon class="bar h1" points="59.7,-227.9 88.4,-227.9 88.4,-237.2 59.7,-237.2"/>
+<polygon class="bar h1" points="60.9,-212.8 85.3,-212.8 85.3,-222.2 60.9,-222.2"/>
+<polygon class="bar h1" points="61.0,-197.9 83.4,-197.9 83.4,-207.2 61.0,-207.2"/>
+<polygon class="bar h1" points="66.5,-182.8 89.9,-182.8 89.9,-192.2 66.5,-192.2"/>
+<polygon class="bar h1" points="207.5,-257.9 221.6,-257.9 221.6,-267.2 207.5,-267.2"/>
+<polygon class="bar h1" points="215.0,-242.8 240.5,-242.8 240.5,-252.2 215.0,-252.2"/>
+<polygon class="bar h1" points="215.1,-227.9 230.4,-227.9 230.4,-237.2 215.1,-237.2"/>
+<polygon class="bar h1" points="215.7,-212.8 228.0,-212.8 228.0,-222.2 215.7,-222.2"/>
+<polygon class="bar h1" points="222.0,-197.9 233.6,-197.9 233.6,-207.2 222.0,-207.2"/>
+<polygon class="bar h1" points="229.2,-182.8 242.5,-182.8 242.5,-192.2 229.2,-192.2"/>
+<polygon class="bar h1" points="64.0,-92.9 86.0,-92.9 86.0,-102.2 64.0,-102.2"/>
+<polygon class="bar h1" points="65.8,-77.9 71.2,-77.9 71.2,-87.2 65.8,-87.2"/>
+<polygon class="bar h1" points="65.9,-62.9 69.8,-62.9 69.8,-72.2 65.9,-72.2"/>
+<polygon class="bar h1" points="67.5,-47.9 70.5,-47.9 70.5,-57.2 67.5,-57.2"/>
+<polygon class="bar h1" points="210.6,-107.9 215.6,-107.9 215.6,-117.2 210.6,-117.2"/>
+<polygon class="bar h1" points="216.6,-92.9 239.4,-92.9 239.4,-102.2 216.6,-102.2"/>
+<polygon class="bar h1" points="219.6,-77.9 233.6,-77.9 233.6,-87.2 219.6,-87.2"/>
+<polygon class="bar h1" points="219.8,-62.8 237.8,-62.8 237.8,-72.2 219.8,-72.2"/>
+<polygon class="bar h1" points="221.0,-47.9 234.9,-47.9 234.9,-57.2 221.0,-57.2"/>
+<polygon class="bar h1" points="228.3,-32.9 232.5,-32.9 232.5,-42.2 228.3,-42.2"/></g>
+<polygon class="face side" points="300.0,0.0 452.4,-106.7 452.4,-556.7 300.0,-450.0"/>
+<polygon class="face top" points="0.0,-450.0 300.0,-450.0 452.4,-556.7 152.4,-556.7"/>
+<polygon class="face front" points="0.0,0.0 300.0,0.0 300.0,-450.0 0.0,-450.0"/>
+<line class="edge" x1="0.0" y1="0.0" x2="0.0" y2="-450.0"/>
+<line class="edge" x1="150.0" y1="0.0" x2="150.0" y2="-450.0"/>
+<line class="edge" x1="300.0" y1="0.0" x2="300.0" y2="-450.0"/>
+<line class="edge" x1="0.0" y1="0.0" x2="300.0" y2="0.0"/>
+<line class="edge" x1="0.0" y1="-150.0" x2="300.0" y2="-150.0"/>
+<line class="edge" x1="0.0" y1="-300.0" x2="300.0" y2="-300.0"/>
+<line class="edge" x1="0.0" y1="-450.0" x2="300.0" y2="-450.0"/>
+<line class="edge" x1="0.0" y1="-450.0" x2="152.4" y2="-556.7"/>
+<line class="edge" x1="150.0" y1="-450.0" x2="302.4" y2="-556.7"/>
+<line class="edge" x1="300.0" y1="-450.0" x2="452.4" y2="-556.7"/>
+<line class="edge" x1="76.2" y1="-503.3" x2="376.2" y2="-503.3"/>
+<line class="edge" x1="152.4" y1="-556.7" x2="452.4" y2="-556.7"/>
+<line class="edge" x1="300.0" y1="0.0" x2="452.4" y2="-106.7"/>
+<line class="edge" x1="300.0" y1="-150.0" x2="452.4" y2="-256.7"/>
+<line class="edge" x1="300.0" y1="-300.0" x2="452.4" y2="-406.7"/>
+<line class="edge" x1="376.2" y1="-53.3" x2="376.2" y2="-503.3"/>
+<line class="edge" x1="452.4" y1="-106.7" x2="452.4" y2="-556.7"/>
+</svg>
