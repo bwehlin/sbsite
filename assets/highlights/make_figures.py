@@ -108,28 +108,6 @@ curves.set_xlim(grid[0], grid[-1])
 curves.set_ylim(bottom=0)
 save(fig, "local-topology.svg")
 
-# 2-3. Disk vs annulus point clouds (from the PyTorch classifier tutorial).
-rng = np.random.default_rng(42)
-
-
-def disk(n):
-    r, t = np.sqrt(rng.uniform(0, 1, n)), rng.uniform(0, 2 * np.pi, n)
-    return np.column_stack([r * np.cos(t), r * np.sin(t)]).astype(np.float32)
-
-
-def annulus(n):
-    r, t = np.sqrt(rng.uniform(0.8**2, 1.2**2, n)), rng.uniform(0, 2 * np.pi, n)
-    return np.column_stack([r * np.cos(t), r * np.sin(t)]).astype(np.float32)
-
-
-half, n = 100, 60
-clouds = sb.zeros((2 * half,), dtype=sb.pcloud32)
-for i in range(2 * half):
-    clouds[i] = disk(n) if i < half else annulus(n)
-barcodes = persistence.compute_persistent_homology(clouds, max_dim=1)
-h1_ranks = persistence.barcode_to_stable_rank(barcodes)[:, 1]
-h1_betti = persistence.barcode_to_betti_curve(barcodes)[:, 1]
-
 # 2. Into existing algorithms: a PCF evaluated on a grid (as the tutorial does with stable
 # ranks, with fewer grid points so each one shows) becomes a feature vector for a small neural
 # network. The PCF is made up for the picture: Betti-curve-like steps that rise and fall.
@@ -177,14 +155,3 @@ for (x, y), c in zip(cells, shade):
 ax.scatter(*zip(*hidden), color=S1, s=110, linewidths=0, zorder=3)
 ax.scatter(*zip(*outputs), color=S2, s=140, linewidths=0, zorder=3)
 save(fig, "features.svg")
-
-# 3. Betti curves: mean H1 Betti curve per class.
-grid = np.linspace(0, 2.0, 800, dtype=np.float32)
-fig, ax = figure()
-for lo, colour in ((0, S1), (half, S2)):
-    for i in range(lo, lo + 15):
-        steps(ax, h1_betti[i], grid, color=colour, alpha=0.3, linewidth=1)
-    steps(ax, sb.mean(h1_betti[lo:lo + half]), grid, color=colour, linewidth=3)
-ax.set_xlim(grid[0], grid[-1])
-ax.set_ylim(bottom=0)
-save(fig, "betti-curves.svg")
