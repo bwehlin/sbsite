@@ -21,13 +21,13 @@ const steps = [
     id: "f-pointclouds",
     svg: pcTensor,
     title: "Point clouds in a tensor",
-    text: "Point clouds of different sizes can be stored in the same tensor.",
+    text: "Point clouds of different sizes can be stored in the same tensor",
   },
   {
     id: "f-barcodes",
     svg: barcodeTensor,
     title: "Barcodes for all of them",
-    text: "Elementwise parallel computations using state-of-the-art algorithms.",
+    text: "Elementwise parallel computations using state-of-the-art algorithms",
   },
   {
     id: "f-betti-tensor",
@@ -52,7 +52,7 @@ const features = [
     title: "Stable ranks, averaged",
     text: "Persistence and stable ranks for a whole collection of point clouds in one call, then a mean per class. H1 stable ranks of 100 filled disks (pale) and 100 annuli (gold): the annulus mean keeps a long-lived loop.",
     alt: "Step functions: faint individual H1 stable ranks and two bold class means. The pale disk mean rises and falls early; the gold annulus mean holds a plateau far to the right.",
-    link: { href: "https://docs.stablebear.org/en/latest/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
+    link: { href: "https://docs.stablebear.org/en/stable/tutorial_notebooks/pytorch_tda_classifier.html", label: "PyTorch classifier tutorial" },
   },
   {
     id: "f-distances",
@@ -85,6 +85,7 @@ const features = [
             </li>
           ))}
         </ol>
+        <figcaption><p><a href="https://docs.stablebear.org/en/stable/persistence.html">Persistent homology guide</a></p></figcaption>
       </figure>
       {features.map((f) => (
         <figure class="showcase-panel" id={f.id}>

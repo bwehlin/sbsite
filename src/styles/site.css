@@ -74,7 +74,9 @@ a { color: var(--espresso); }
 /* Honey bar under the current item: how far the reader has scrolled through its figure. */
 .showcase-nav a[aria-current="true"]::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: var(--progress, 0%); background: var(--honey); }
 .showcase-nav a { font: var(--text-h3); }
-.showcase-panel { margin: 0; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; scroll-margin-top: var(--space-8); }
+/* A fixed gap between the figures, so the spacing doesn't depend on each figure's height. */
+.showcase-panels { display: grid; gap: calc(var(--space-8) * 3); }
+.showcase-panel { margin: 0; scroll-margin-top: var(--space-8); }
 .showcase-panel img { width: 100%; height: 24rem; object-fit: contain; }
 /* Tensor pipeline: three figures side by side. The inlined SVGs read --ink and --espresso,
    so point them at the band's light colours. */
@@ -89,7 +91,8 @@ a { color: var(--espresso); }
   .showcase-side { position: static; }
   .showcase-side h2 { margin-bottom: 0; }
   .showcase-nav { display: none; }
-  .showcase-panel { min-height: 0; padding-top: var(--space-8); }
+  .showcase-panels { gap: 0; }
+  .showcase-panel { padding-top: var(--space-8); }
   .showcase-panel img { height: auto; max-height: 20rem; }
 }
 
