@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+
+// Newest first; items without a date go last.
+const items = (await getCollection("news")).sort(
+  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+);
+const rendered = await Promise.all(items.map(async (item) => ({ item, Content: (await render(item)).Content })));
+---
+
+<Base title="News | StableBear" description="Releases and other news about StableBear.">
+  <section class="wrap news" aria-labelledby="news-title">
+    <h1 id="news-title">News</h1>
+    {rendered.map(({ item, Content }) => (
+      <article id={item.id} class="news-card">
+        {item.data.tag && <p class="badge">{item.data.tag}</p>}
+        <h2>{item.data.title}</h2>
+        {item.data.date && <p class="small"><time datetime={item.data.date.toISOString().slice(0, 10)}>{item.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</time></p>}
+        <Content />
+      </article>
+    ))}
+  </section>
+</Base>

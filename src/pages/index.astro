@@ -4,6 +4,13 @@ import Showcase from "../components/Showcase.astro";
 import CopyCommand from "../components/CopyCommand.astro";
 import GitHubLink from "../components/GitHubLink.astro";
 import bear from "../../assets/logos/stablebear-bear.svg";
+import { getCollection } from "astro:content";
+
+// Newest news item for the highlight beside the install block.
+const [latest] = (await getCollection("news")).sort(
+  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
 
 <Base
@@ -26,10 +33,24 @@ import bear from "../../assets/logos/stablebear-bear.svg";
   </section>
 
   <section id="install" class="band" aria-labelledby="install-title">
-    <div class="wrap">
-      <h2 id="install-title">Install</h2>
-      <CopyCommand command="pip install stablebear" />
-      <p>Then <code>import stablebear as sb</code> and follow the <a href="https://docs.stablebear.org">documentation</a> for examples.</p>
+    <div class="wrap install-grid">
+      <div>
+        <h2 id="install-title">Install</h2>
+        <CopyCommand command="pip install stablebear" />
+        <p>Then <code>import stablebear as sb</code> and follow the <a href="https://docs.stablebear.org">documentation</a> for examples.</p>
+      </div>
+      {latest && (
+        <section class="latest" aria-labelledby="latest-title">
+          <h2 id="latest-title">Latest news</h2>
+          <div class="news-card">
+            {latest.data.tag && <p class="badge">{latest.data.tag}</p>}
+            <h3>{latest.data.title}</h3>
+            <p>{latest.data.summary}</p>
+            <p><a href={`${base}news/#${latest.id}`}>Read more</a></p>
+          </div>
+          <p><a href={`${base}news/`}>All news</a></p>
+        </section>
+      )}
     </div>
   </section>
 
