@@ -8,7 +8,7 @@ const news = defineCollection({
   loader: glob({ base: "./src/content/news", pattern: "*.md" }),
   schema: z.object({
     title: z.string(),
-    date: z.coerce.date().optional(),
+    date: z.coerce.date(),
     summary: z.string(),
     // Short label shown as a badge, such as "Release".
     tag: z.string().optional(),

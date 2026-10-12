@@ -2,9 +2,9 @@
 import Base from "../layouts/Base.astro";
 import { getCollection, render } from "astro:content";
 
-// Newest first; items without a date go last.
+// Newest first.
 const items = (await getCollection("news")).sort(
-  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 const rendered = await Promise.all(items.map(async (item) => ({ item, Content: (await render(item)).Content })));
 ---
@@ -16,7 +16,7 @@ const rendered = await Promise.all(items.map(async (item) => ({ item, Content: (
       <article id={item.id} class="news-card">
         {item.data.tag && <p class="badge">{item.data.tag}</p>}
         <h2>{item.data.title}</h2>
-        {item.data.date && <p class="small"><time datetime={item.data.date.toISOString().slice(0, 10)}>{item.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</time></p>}
+        <p class="small"><time datetime={item.data.date.toISOString().slice(0, 10)}>{item.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</time></p>
         <Content />
       </article>
     ))}

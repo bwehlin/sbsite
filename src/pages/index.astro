@@ -8,7 +8,7 @@ import { getCollection } from "astro:content";
 
 // Newest news item for the highlight beside the install block.
 const [latest] = (await getCollection("news")).sort(
-  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
@@ -43,8 +43,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
         <section class="latest" aria-labelledby="latest-title">
           <h2 id="latest-title">Latest news</h2>
           <div class="news-card">
-            {latest.data.tag && <p class="badge">{latest.data.tag}</p>}
             <h3>{latest.data.title}</h3>
+            <p class="small"><time datetime={latest.data.date.toISOString().slice(0, 10)}>{latest.data.date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</time></p>
             <p>{latest.data.summary}</p>
             <p><a href={`${base}news/#${latest.id}`}>Read more</a></p>
           </div>
