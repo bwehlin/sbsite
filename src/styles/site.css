@@ -114,6 +114,8 @@ a { color: var(--espresso); }
 /* Latest news beside the install block in the install band; stacked below it on narrow screens. */
 .install-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: calc(var(--space-8) * 1.5); align-items: start; }
 @media (max-width: 960px) { .install-grid { grid-template-columns: 1fr; } }
+/* Vertical rule between the two columns, centred in the gap; only while they sit side by side. */
+@media (min-width: 961px) { .install-grid { column-gap: var(--space-8); } .latest { border-left: 1px solid var(--border); padding-left: var(--space-8); } }
 .latest h2 { margin-bottom: var(--space-4); }
 .latest .news-card { margin-bottom: var(--space-4); }
 
