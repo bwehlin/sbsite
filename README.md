@@ -11,7 +11,7 @@ The StableBear landing page, built with Astro and served by GitHub Pages.
 
 ```sh
 npm ci
-npm run dev     # preview at http://localhost:4321/sbsite/ (port 8000 in the devcontainer)
+npm run dev     # preview at http://localhost:4321/ (port 8000 in the devcontainer)
 npm run build   # static site in dist/
 ```
 
@@ -20,7 +20,7 @@ npm run build   # static site in dist/
 
 ## Publishing
 
-`.github/workflows/deploy.yml` builds the site and deploys it to GitHub Pages on every push to `gh-pages`. One-time setup: Settings > Pages > Source: **GitHub Actions**. The site is then at https://bwehlin.github.io/sbsite/.
+`.github/workflows/deploy.yml` builds the site and deploys it to GitHub Pages on every push to `gh-pages`. One-time setup: Settings > Pages > Source: **GitHub Actions**. The site is then at https://stablebear.org (custom domain via `public/CNAME`).
 
 To serve it at stablebear.org instead: add `public/CNAME` containing `stablebear.org`, set `site: "https://stablebear.org"` and remove `base` in `astro.config.mjs`, and point the domain's DNS at GitHub Pages (currently stablebear.org redirects to the docs, so that redirect has to go).
 

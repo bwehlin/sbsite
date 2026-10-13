@@ -6,7 +6,7 @@ Landing page for StableBear, an open-source Python/C++/CUDA package for TDA on p
 
 - Astro (static output). Pages in `src/pages/`, the shared shell in `src/layouts/Base.astro`, widgets as components in `src/components/` (markup, data and their `<script>` together). Global styles in `src/styles/site.css`.
 - `npm run dev` for the preview (port 8000 in the devcontainer), `npm run build` to check the static build in `dist/`.
-- Reference local images and SVGs by importing them (`import x from "../../assets/..."`, then `x.src`) so the `/sbsite` base path is applied (the dev server is at `/sbsite/` too); never hard-code `/assets/...` paths.
+- Reference local images and SVGs by importing them (`import x from "../../assets/..."`, then `x.src`) so any base path is applied; never hard-code `/assets/...` paths.
 - `.github/workflows/deploy.yml` builds and deploys to GitHub Pages on every push to `gh-pages`.
 - Prefer an existing, well-maintained component or library over hand-rolled widget JavaScript.
 
