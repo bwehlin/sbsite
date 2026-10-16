@@ -57,3 +57,18 @@ const home = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     </footer>
   </body>
 </html>
+
+<script>
+  // On phones the navbar slides away while scrolling down and comes back on scrolling up.
+  const nav = document.querySelector<HTMLElement>(".nav")!;
+  const phone = matchMedia("(max-width: 720px)");
+  let lastY = scrollY;
+  function update() {
+    const y = scrollY;
+    if (Math.abs(y - lastY) < 4 && phone.matches) return;
+    nav.classList.toggle("nav-hidden", phone.matches && y > lastY && y > nav.offsetHeight);
+    lastY = y;
+  }
+  addEventListener("scroll", update, { passive: true });
+  phone.addEventListener("change", update);
+</script>

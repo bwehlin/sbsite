@@ -37,6 +37,9 @@ a { color: var(--espresso); }
 .nav nav { display: flex; gap: var(--space-4); }
 .nav nav a { text-decoration: none; padding: var(--space-1) 0; }
 .nav nav a:hover { text-decoration: underline; }
+/* Slid away on phones while scrolling down (Base.astro); back as soon as it takes focus. */
+.nav-hidden:not(:focus-within) { transform: translateY(-100%); }
+@media (prefers-reduced-motion: no-preference) { .nav { transition: transform 200ms ease; } }
 
 /* Buttons */
 .button {
@@ -61,7 +64,7 @@ a { color: var(--espresso); }
    Off under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .stack { --peek: var(--space-4); }
-  .stack > section { position: sticky; top: var(--stick, 0px); }
+  .stack > section { position: sticky; top: var(--stick, 0px); transition: top 200ms ease; }
   /* Full width, so no older section shows at the sides; rounded top corners mark the edge. */
   .stack > section + section { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
   .stack > .showcase { margin-inline: 0; border-radius: var(--radius-lg); }

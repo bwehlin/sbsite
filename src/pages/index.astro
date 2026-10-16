@@ -75,19 +75,21 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
   // Each stacked section sticks once its bottom reaches the bottom of the window, so the next
   // one slides over it. Section i stops i peeks down, so the top strip of every earlier
   // section stays in view. The stack ends with the showcase, which then scrolls away as usual.
-  // Everything stops below the fixed navbar, whose height goes in --nav-h.
+  // Everything stops below the fixed navbar, whose height goes in --nav-h (0 while it is
+  // slid away on phones, see Base.astro).
   const nav = document.querySelector<HTMLElement>(".nav")!;
   const stack = document.querySelector(".stack")!;
   const sections = [...stack.querySelectorAll<HTMLElement>(":scope > section")];
   const peek = () => parseFloat(getComputedStyle(stack).getPropertyValue("--peek")) || 0;
   function stick() {
-    const navH = nav.offsetHeight;
+    const navH = nav.classList.contains("nav-hidden") ? 0 : nav.offsetHeight;
     document.documentElement.style.setProperty("--nav-h", `${navH}px`);
     sections.forEach((s, i) =>
       s.style.setProperty("--stick", `${Math.min(navH + i * peek(), innerHeight - s.offsetHeight)}px`));
   }
   new ResizeObserver(stick).observe(document.body);
   addEventListener("resize", stick);
+  new MutationObserver(stick).observe(nav, { attributeFilter: ["class"] });
 
   // A link into a stuck section would scroll to where it is stuck, not where it sits in the
   // page. Measure the target with stacking switched off, then scroll there.
