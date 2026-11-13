@@ -1,7 +1,9 @@
 """Generate the highlight banner figures (SVG, transparent, for the espresso band).
 
-Run with stablebear 0.5.1b1 and matplotlib installed:
+Run with stablebear and matplotlib installed:
     python assets/highlights/make_figures.py
+
+Figures 1-3 were made with stablebear 0.5.1b1; the time series figure (4) needs 0.6.0 or newer.
 
 Colours come from the dark theme in design/tokens.json, which reads on the
 espresso band. Figures carry no text: the slide copy explains them.
@@ -15,7 +17,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 import stablebear as sb
-from stablebear import persistence
+from stablebear import persistence, timeseries as ts
 
 HERE = Path(__file__).parent
 TOKENS = json.loads((HERE.parent.parent / "design" / "tokens.json").read_text())
@@ -235,3 +237,53 @@ for i in range(n):
         ax.add_patch(plt.Rectangle((x, y), cell, cell, facecolor=shade(np.clip((matrix[i, j] - lo) / (hi - lo), 0, 1)),
                                    edgecolor=MUTED, linewidth=0.3, zorder=3))
 save(fig, "distances.svg")
+
+# 4. Time series: a share price, traded at irregular times and held between trades, cut into
+# three windows; each window's log price is delay-embedded into a point cloud, with the delay a
+# quarter of the cycle in the last window. The price is made up for the picture: a calm rise and
+# a volatile sell-off (geometric Brownian motion) embed as trails along the diagonal, while a
+# sideways market cycling in a range embeds as a loop, which persistent homology sees in H1.
+PERIOD = 0.5
+rng = np.random.default_rng(3)
+t = np.r_[0, np.sort(rng.uniform(0, 6, 898)), 6]
+regime = np.minimum(t // 2, 2).astype(int)
+drift, vol = np.array([0.2, -0.3, 0.0])[regime], np.array([0.05, 0.16, 0.05])[regime]
+dt = np.diff(t, prepend=0)
+log_price = np.cumsum(drift * dt + vol * np.sqrt(dt) * rng.standard_normal(t.size))
+# The cycle's period and amplitude wander, so it reads as a market trading in a range.
+wander = lambda s: np.cumsum(s * np.sqrt(dt) * rng.standard_normal(t.size))
+phase = np.cumsum(2 * np.pi / PERIOD * dt * np.exp(wander(0.15)) * (regime == 2))
+log_price += np.where(regime == 2, 0.1 * np.exp(wander(0.3)) * np.sin(phase), 0)
+price = ts.TimeSeries(np.exp(log_price), t)
+windows = ts.cut_windows(ts.TimeSeries(log_price, t), 2.0, 2.0, anchor="start")
+assert windows.shape[0] == 3
+clouds = [np.asarray(ts.to_point_clouds(ts.delay_embed(windows[k], 2, PERIOD / 4)))
+          for k in range(3)]
+# Each cloud centred and scaled to its own size, so the trails show their shape too.
+clouds = [(c - c.mean(axis=0)) / np.abs(c - c.mean(axis=0)).max() for c in clouds]
+def longest_h1(cloud):
+    bars = np.asarray(persistence.compute_persistent_homology(sb.PointCloud(cloud), max_dim=1)[1])
+    return (bars[:, 1] - bars[:, 0]).max(initial=0) if bars.size else 0
+h1 = [longest_h1(c) for c in clouds]
+assert h1[2] > 10 * max(h1[:2]), "only the cycling window should have a loop"
+
+fig, ax = figure()
+ax.axis("off")
+ax.set_aspect("equal")
+ax.set_xlim(0, 8)
+ax.set_ylim(0, 5)
+# The price across the top, x 0.2-7.8, y 3.2-4.8; each window a band, and below it its cloud,
+# x centred on the window, y centred on 1.45.
+X = lambda u: 0.2 + 7.6 * u / 6
+dense = np.linspace(0, 6, 6000)
+p = np.log(np.asarray(price(dense)).ravel())
+Y = lambda v: 3.2 + 1.6 * (v - p.min()) / (p.max() - p.min())
+ax.plot(X(dense), Y(p), drawstyle="steps-post", color=S1, linewidth=1.2, zorder=4)
+for k, cloud in enumerate(clouds):
+    a, b = X(2 * k), X(2 * k + 2)
+    ax.add_patch(plt.Rectangle((a + 0.04, 3.05), b - a - 0.08, 1.9, facecolor=S2, alpha=0.12,
+                               edgecolor=S2, linewidth=1, zorder=2))
+    cx = (a + b) / 2
+    ax.scatter(cx + 1.05 * cloud[:, 0], 1.45 + 1.05 * cloud[:, 1], color=S2, s=6,
+               linewidths=0, alpha=0.85, zorder=3)
+save(fig, "timeseries.svg")

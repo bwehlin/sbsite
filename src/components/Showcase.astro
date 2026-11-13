@@ -4,6 +4,7 @@
 import local from "../../assets/highlights/local-topology.svg";
 import distances from "../../assets/highlights/distances.svg";
 import featureVectors from "../../assets/highlights/features.svg";
+import timeseries from "../../assets/highlights/timeseries.svg";
 // The tensor figures are inlined so they can take the band's colours (see .showcase-tensors).
 import pcTensor from "../../tensorfigures/figures/pointcloud-tensor-3x2.svg?raw";
 import barcodeTensor from "../../tensorfigures/figures/barcode-tensor-3x2x2-boxes.svg?raw";
@@ -38,6 +39,14 @@ const steps = [
 ];
 
 const features = [
+  {
+    id: "f-timeseries",
+    img: timeseries,
+    title: "Time series",
+    text: "Windowing, delay embedding and more, with numeric, duration or date timestamps. Multiple channels, each sampled at its own irregular times.",
+    alt: "A share price drawn as a step function across the top, split into three windows: a calm, steady rise, a choppy top and sell-off, and a sideways market swinging up and down in a range. Below each window, its delay embedding as a gold point cloud: a thin trail along the diagonal, a rougher trail that bunches up at the top, and a ring with a hole in the middle.",
+    link: { href: "https://docs.stablebear.org/en/stable/timeseries.html", label: "Time series guide" },
+  },
   {
     id: "f-local",
     img: local,
